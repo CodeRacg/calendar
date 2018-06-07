@@ -1,0 +1,23 @@
+.month{
+  width: 100%;
+  
+  thead{
+    tr:not(.week){
+      background: $month_title;
+    }
+  }
+  
+  .days td{
+    text-align: center;
+    background: $day;
+    border: 1px #FFF solid;
+    color: #000;
+    font-weight: 700;
+    
+    &:not(.empty){
+      &:first-of-type,&:last-of-type{
+        background: $weekend;
+      }
+    }
+  }
+}

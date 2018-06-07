@@ -11,7 +11,106 @@
   <!-- App Styles -->
   <link rel="stylesheet" href="./assets/css/main.css">
 </head>
-<body>
+<body id="App">
+ 
+  <form>
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+        <div class="row">
+          <div class="col-xs-12 col-sm-4">
+            <div class="form-container icon">
+              <label for="date">Start Date</label>
+              <input type="text" id="date" class="form-control" maxlength="10">
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-4">
+            <div class="form-container icon">
+              <label for="days">Number of days</label>
+              <input type="number" id="days" class="form-control" value="1" max='999' min='0'>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-4">
+            <div class="form-container icon">
+              <label for="code">Country Code</label>
+              <input type="text" id="code" class="form-control" >
+            </div>
+          </div>
+          <div class="col-xs-12 text-center pd-t-20">
+            <button class="btn btn-primary">Render</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  
+  <div id="result" class="row">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+      <table class="month">
+        <thead>
+          <tr class="week">
+            <th class="text-center">S</th>
+            <th class="text-center">M</th>
+            <th class="text-center">T</th>
+            <th class="text-center">W</th>
+            <th class="text-center">T</th>
+            <th class="text-center">F</th>
+            <th class="text-center">S</th>
+          </tr>
+          <tr>
+            <th colspan="7" class="text-center">Enero 2018</th>
+          </tr>          
+        </thead>
+        <tbody class="days">
+          <tr>
+            <td class="empty"></td>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+            <td>10</td>
+            <td>11</td>
+            <td>12</td>
+            <td>13</td>
+          </tr>
+          <tr>
+            <td>14</td>
+            <td>15</td>
+            <td>16</td>
+            <td>17</td>
+            <td>18</td>
+            <td>19</td>
+            <td>20</td>
+          </tr>
+          <tr>
+            <td>21</td>
+            <td>22</td>
+            <td>23</td>
+            <td>24</td>
+            <td>25</td>
+            <td>26</td>
+            <td>27</td>
+          </tr>
+          <tr>
+            <td>28</td>
+            <td>29</td>
+            <td>30</td>
+            <td>31</td>
+            <td class="empty"></td>
+            <td class="empty"></td>
+            <td class="empty"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+ 
   
   <!-- Jquery 3.3.1 -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
