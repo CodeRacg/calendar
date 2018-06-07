@@ -14,10 +14,18 @@
     color: #000;
     font-weight: 700;
     width: 14.29%;
-    height: 30px;
     
     &.weekend{
       background: $weekend;
     }
+    &.weekdays:not(.empty){
+      background: $weekdays;
+    }
+  }
+  
+  td{
+    height: 38px;
+    min-height: 38px;
+    max-height: 38px;
   }
 }

@@ -18,7 +18,8 @@ function App(){
     ev.preventDefault();
     
     var init_date = new Date(map.form.find('#date').val()), days = map.form.find('#days').val(), code = map.form.find('#code').val();
-    console.log(init_date,days,code);
+    
+    // Validate the inputs
     if(init_date == 'Invalid Date'){
       alert('Start Date has a invalid format. Please chek the input and try again.');
       map.form.find('#date').focus();
@@ -35,28 +36,55 @@ function App(){
       return;
     }
         
+    // Initialize all Date objects
     init_date.setDate(init_date.getDate() + 1);
     var last_date = new Date(init_date), iterate_date = new Date(init_date);
     last_date.setDate(last_date.getDate() + parseInt(days));
     
-    var last = null, current = null;
+    var last = null, current = null, tbody = null;
         
+    //Clear the result div
+    map.result.empty();
+    
+    //Iterate the date
     while(iterate_date.getTime() !== last_date.getTime()){
       current = iterate_date.getMonth()+'_'+iterate_date.getFullYear();
+      
+      //Start new Month
       if(current != last){
-        map.result.append(StartMonth(iterate_date.getMonth(),iterate_date.getFullYear()));        
         
+        if(last != null){
+          CompleteMonth(map.result.find('#'+last),8 - map.result.find('#'+last+' .days tr:last-of-type td').length);
+        }        
+        
+        map.result.append(StartMonth(iterate_date.getMonth(),iterate_date.getFullYear()));        
+        tbody = map.result.find('#'+current+' .days');
+        
+        tbody.append('<tr></tr>');
+        
+        //Complete the days of week before the start date
         for(var i=0; i<iterate_date.getDay();i++){
-          map.result.find('#'+current+' .days').append(Day());          
+          tbody.find('tr:last-of-type').append(Day()); 
         }
         last = current;
       }
       
-      map.result.find('#'+current+' .days').append(Day(iterate_date.getDate(),iterate_date.getDay())); 
+      //Render a new row when is a new week
+      if(iterate_date.getDay() == 0){
+        tbody.append('<tr></tr>');
+      }
+      
+      tbody.find('tr:last-of-type').append(Day(iterate_date.getDate(),iterate_date.getDay())); 
       
       iterate_date.setDate(iterate_date.getDate() + 1);
     }
+    
+    if(last != null){
+      CompleteMonth(map.result.find('#'+last+' .days tr:last-of-type'),8 - map.result.find('#'+last+' .days tr:last-of-type td').length);
+    }
   }
+  
+  
   
   
   
@@ -76,13 +104,21 @@ function App(){
     txt += '      </tr>';
     txt += '    </thead>';
     txt += '    <tbody class="days">';
+    txt += '    </tbody">';
+    txt += '  </table">';
+    txt += '</div">';
     return txt;
   }
   
   var Day = function(day,weekend){
-    return '<td class="'+(weekend == 0 || weekend == 6 ? 'weekend':'')+' '+(day == undefined || day == null || day == 0 ? 'empty':'')+'">'+(day ? day:'')+'</td>';
+    return '<td class="'+(weekend == 0 || weekend == 6 ? 'weekend':'weekdays')+' '+(day == undefined || day == null || day == 0 ? 'empty':'')+'">'+(day ? day:'')+'</td>';
   }
   
+  var CompleteMonth = function(element, days){
+    var txt = '';
+    for(var j=0; j < days; j++) txt += Day();
+    element.find('.days tr:last-of-type').append(txt);
+  }
   
   /* Public Function */
   this.Init = function(container){

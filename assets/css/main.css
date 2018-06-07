@@ -3,6 +3,21 @@
   padding-top: 20px;
 }
 
+/* line 5, ../sass/_global.scss */
+body {
+  padding: 20px;
+}
+
+/* line 10, ../sass/_global.scss */
+#result [class*='col-'] {
+  /*padding: 10px;
+  border-radius: 10px;
+  border: 1px #c1c1c1 solid;
+  box-shadow: 4px 5px 14px 0px #c1c1c1;*/
+  min-height: 270px;
+  margin-bottom: 10px;
+}
+
 /* line 1, ../sass/_form.scss */
 form {
   padding: 10px;
@@ -24,9 +39,18 @@ form {
   color: #000;
   font-weight: 700;
   width: 14.29%;
-  height: 30px;
 }
-/* line 19, ../sass/_calendar.scss */
+/* line 18, ../sass/_calendar.scss */
 .month .days td.weekend {
   background: #fcfa1b;
+}
+/* line 21, ../sass/_calendar.scss */
+.month .days td.weekdays:not(.empty) {
+  background: #c8de9e;
+}
+/* line 26, ../sass/_calendar.scss */
+.month td {
+  height: 38px;
+  min-height: 38px;
+  max-height: 38px;
 }

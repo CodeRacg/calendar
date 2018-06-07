@@ -1,3 +1,18 @@
 .pd-t-20{
   padding-top: 20px;
 }
+
+body{
+  padding: 20px;
+}
+
+#result{
+  [class*='col-']{
+    /*padding: 10px;
+    border-radius: 10px;
+    border: 1px #c1c1c1 solid;
+    box-shadow: 4px 5px 14px 0px #c1c1c1;*/
+    min-height: 270px;
+    margin-bottom: 10px;
+  }
+}
