@@ -53,6 +53,7 @@ function App(){
       //Start new Month
       if(current != last){
         
+        //Complete the days of last rendered month
         if(last != null){
           CompleteMonth(map.result.find('#'+last),8 - map.result.find('#'+last+' .days tr:last-of-type td').length);
         }        
@@ -74,20 +75,19 @@ function App(){
         tbody.append('<tr></tr>');
       }
       
+      //Render the days
       tbody.find('tr:last-of-type').append(Day(iterate_date.getDate(),iterate_date.getDay())); 
       
+      //Increment the date in 1 day
       iterate_date.setDate(iterate_date.getDate() + 1);
     }
     
+    //If any month was rendered, complete the days
     if(last != null){
       CompleteMonth(map.result.find('#'+last),8 - map.result.find('#'+last+' .days tr:last-of-type td').length);
     }
   }
-  
-  
-  
-  
-  
+    
   /* DOM Manipulation */
   var StartMonth = function(month, year){
     var txt = '';
