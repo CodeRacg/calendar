@@ -80,7 +80,7 @@ function App(){
     }
     
     if(last != null){
-      CompleteMonth(map.result.find('#'+last+' .days tr:last-of-type'),8 - map.result.find('#'+last+' .days tr:last-of-type td').length);
+      CompleteMonth(map.result.find('#'+last),8 - map.result.find('#'+last+' .days tr:last-of-type td').length);
     }
   }
   

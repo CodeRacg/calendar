@@ -17,6 +17,14 @@ body {
   min-height: 270px;
   margin-bottom: 10px;
 }
+/* line 19, ../sass/_global.scss */
+#result h3 {
+  text-align: center;
+  background-color: #eef99659;
+  padding: 50px;
+  border: 1px #000 dashed;
+  border-radius: 10px;
+}
 
 /* line 1, ../sass/_form.scss */
 form {
