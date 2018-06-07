@@ -6,6 +6,7 @@ function App(){
   var SetMap = function(container){
     map.container = container;
     map.form = container.find('form');
+    map.result = container.find('#result');
   }
   
   var SetHandler = function(){
@@ -16,8 +17,45 @@ function App(){
   var FormSubmit = function(ev){
     ev.preventDefault();
     
+    var init_date = new Date(map.form.find('#date').val()), days = map.form.find('#days').val(), code = map.form.find('#code').val();
+    console.log(init_date,days,code);
+    if(init_date == 'Invalid Date'){
+      alert('Start Date has a invalid format. Please chek the input and try again.');
+      map.form.find('#date').focus();
+      return;
+    }
+    if(days.trim().length == 0 || days < 1){
+      alert('Number of days is invalid. Please chek the input and try again.');
+      map.form.find('#days').focus();
+      return;
+    }
+    if(code.trim().length == 0){
+      alert('Country code is invalid. Please chek the input and try again.');
+      map.form.find('#code').focus();
+      return;
+    }
+        
+    init_date.setDate(init_date.getDate() + 1);
+    var last_date = new Date(init_date), iterate_date = new Date(init_date);
+    last_date.setDate(last_date.getDate() + parseInt(days));
     
-    
+    var last = null, current = null;
+        
+    while(iterate_date.getTime() !== last_date.getTime()){
+      current = iterate_date.getMonth()+'_'+iterate_date.getFullYear();
+      if(current != last){
+        map.result.append(StartMonth(iterate_date.getMonth(),iterate_date.getFullYear()));        
+        
+        for(var i=0; i<iterate_date.getDay();i++){
+          map.result.find('#'+current+' .days').append(Day());          
+        }
+        last = current;
+      }
+      
+      map.result.find('#'+current+' .days').append(Day(iterate_date.getDate(),iterate_date.getDay())); 
+      
+      iterate_date.setDate(iterate_date.getDate() + 1);
+    }
   }
   
   
@@ -26,7 +64,7 @@ function App(){
   var StartMonth = function(month, year){
     var txt = '';
     txt += '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">';
-    txt += '  <table id="'+month+'/'+year+'" class="month">';
+    txt += '  <table id="'+month+'_'+year+'" class="month">';
     txt += '    <thead>';
     txt += '      <tr class="week">';
     $.each(_week,function(){
@@ -41,18 +79,15 @@ function App(){
     return txt;
   }
   
-  var Day = function(day){
-    return '<td class="'+(day == undefined || day == null || day == 0 ? 'empty':'')+'">'+(day ? day:'')+'</td>';
+  var Day = function(day,weekend){
+    return '<td class="'+(weekend == 0 || weekend == 6 ? 'weekend':'')+' '+(day == undefined || day == null || day == 0 ? 'empty':'')+'">'+(day ? day:'')+'</td>';
   }
   
   
   /* Public Function */
   this.Init = function(container){
     SetMap(container);
-    SetHandler();
-    
-    $("#result").append(StartMonth(5,2018));
-    
+    SetHandler();    
   }
 }
 

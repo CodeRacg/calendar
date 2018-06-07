@@ -13,11 +13,11 @@
     border: 1px #FFF solid;
     color: #000;
     font-weight: 700;
+    width: 14.29%;
+    height: 30px;
     
-    &:not(.empty){
-      &:first-of-type,&:last-of-type{
-        background: $weekend;
-      }
+    &.weekend{
+      background: $weekend;
     }
   }
 }
